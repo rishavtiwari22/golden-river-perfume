@@ -27,13 +27,13 @@ const Footer = () => {
             </p>
             <div className="flex gap-4 mt-6">
               {/* TODO: Replace # with your actual social media URLs */}
-              <a href="#" aria-label="Instagram" className="text-cream-200/40 hover:text-gold-400 transition-colors duration-300">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-cream-200/40 hover:text-gold-400 transition-colors duration-300">
                 <Instagram size={18} strokeWidth={1.5} />
               </a>
-              <a href="#" aria-label="Facebook" className="text-cream-200/40 hover:text-gold-400 transition-colors duration-300">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-cream-200/40 hover:text-gold-400 transition-colors duration-300">
                 <Facebook size={18} strokeWidth={1.5} />
               </a>
-              <a href="#" aria-label="Twitter" className="text-cream-200/40 hover:text-gold-400 transition-colors duration-300">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-cream-200/40 hover:text-gold-400 transition-colors duration-300">
                 <Twitter size={18} strokeWidth={1.5} />
               </a>
             </div>
@@ -115,13 +115,13 @@ const Footer = () => {
           </p>
           <div className="flex gap-6">
             {['Privacy Policy', 'Terms of Service', 'Shipping Policy'].map(item => (
-              <a
+              <Link
                 key={item}
-                href="#"
+                to="/"
                 className="font-body text-xs text-cream-200/30 hover:text-gold-400 transition-colors duration-300"
               >
                 {item}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
