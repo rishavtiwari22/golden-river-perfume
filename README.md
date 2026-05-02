@@ -300,3 +300,4 @@ git push -u origin main
 
 For questions, open a GitHub issue or email: `hello@goldenriverperfume.com`  
 *(TODO: Replace with your actual support email)*
+# golden-river-perfume
