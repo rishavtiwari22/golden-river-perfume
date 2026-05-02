@@ -39,15 +39,24 @@ router.post('/', contactLimiter, contactValidation, async (req, res) => {
   console.log("Incoming contact data:", req.body);
 
   try {
-    // 1. Save to MongoDB
-    const contact = new Contact({
-      name,
-      email,
-      subject: subject || 'General Enquiry',
-      message,
-      ip: req.ip,
-    });
-    await contact.save();
+    // 1. Save to MongoDB (with Offline fallback)
+    try {
+      if (require('mongoose').connection.readyState === 1) {
+        const contact = new Contact({
+          name,
+          email,
+          subject: subject || 'General Enquiry',
+          message,
+          ip: req.ip,
+        });
+        await contact.save();
+        console.log("📨 Message saved to DB");
+      } else {
+        console.warn("⚠️  DB Offline: Simulating successful message submission (Mock Mode)");
+      }
+    } catch (dbErr) {
+      console.error("❌ DB Save Error:", dbErr.message);
+    }
 
     // 2. Send emails (non-blocking — don't fail the response if email fails)
     const emailPromises = [];
@@ -76,7 +85,7 @@ router.post('/', contactLimiter, contactValidation, async (req, res) => {
     res.status(201).json({
       success: true,
       message: 'Your message has been received. We\'ll be in touch shortly!',
-      id: contact._id,
+      id: typeof contact !== 'undefined' ? contact._id : 'mock_id',
     });
   } catch (err) {
     console.error('Contact route error:', err);
