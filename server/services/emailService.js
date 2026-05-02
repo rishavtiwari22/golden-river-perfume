@@ -107,4 +107,58 @@ const sendAutoReply = async ({ name, email }) => {
   return transporter.sendMail(mailOptions);
 };
 
-module.exports = { sendAdminNotification, sendAutoReply };
+// ─── Send Order Confirmation ──────────────────────────────────────────────
+const sendOrderConfirmation = async (order) => {
+  const transporter = createTransporter();
+
+  const mailOptions = {
+    from: `"Golden River" <${process.env.EMAIL_USER}>`,
+    to: order.email,
+    subject: "Order Confirmation — Golden River",
+    html: `
+    <div style="max-width:600px;margin:auto;font-family:Arial;padding:20px;background:#fdfcf8;border:1px solid #d4a017;">
+      
+      <h2 style="text-align:center;color:#1a1813;letter-spacing:0.2em;">GOLDEN RIVER</h2>
+
+      <p>Hello ${order.name},</p>
+      <p>Your order has been placed successfully 🎉</p>
+
+      <div style="border:1px solid #ddd;padding:15px;margin-top:20px;background:#fff;">
+        
+        <img src="${order.image}" 
+             style="width:100%;max-width:250px;display:block;margin:auto;" />
+
+        <h3 style="text-align:center;color:#1a1813;">${order.productName}</h3>
+
+        <p style="text-align:center;">Size: ${order.size}</p>
+        <p style="text-align:center;">Price: ₹${order.price}</p>
+
+        <p style="text-align:center;font-size:12px;color:#777;">
+          Order ID: ${order.orderId}
+        </p>
+      </div>
+
+      <div style="margin-top:20px;">
+        <h4 style="color:#d4a017;text-transform:uppercase;font-size:12px;letter-spacing:0.1em;">Shipping Details</h4>
+        <p style="color:#444;font-size:14px;line-height:1.6;">
+          ${order.address}<br/>
+          Phone: ${order.phone}
+        </p>
+      </div>
+
+      <p style="margin-top:30px;font-size:12px;color:#888;text-align:center;border-top:1px solid #eee;padding-top:20px;">
+        Thank you for shopping with Golden River ✨
+      </p>
+
+    </div>
+    `
+  };
+
+  return transporter.sendMail(mailOptions);
+};
+
+module.exports = { 
+  sendAdminNotification, 
+  sendAutoReply,
+  sendOrderConfirmation 
+};

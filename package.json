@@ -8,12 +8,10 @@
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm run dev",
     "build:client": "cd client && npm run build",
-    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\""
+    "dev": "concurrently --names \"SERVER,CLIENT\" --prefix-colors \"yellow,cyan\" \"cd server && npm run dev\" \"cd client && npm start\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
-  "dependencies": {
-    "dotenv": "^17.4.2"
-  }
+  "dependencies": {}
 }

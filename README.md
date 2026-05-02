@@ -34,10 +34,14 @@ golden-river-perfume/
 │   └── vercel.json                # Vercel deployment config
 │
 ├── server/                        # Node.js backend
+│   ├── config/
+│   │   └── db.js                  # MongoDB connection logic
 │   ├── models/
-│   │   └── Contact.js             # MongoDB schema for contact submissions
+│   │   ├── Contact.js             # MongoDB schema for contact submissions
+│   │   └── Order.js               # MongoDB schema for orders
 │   ├── routes/
-│   │   └── contact.js             # POST /api/contact route
+│   │   ├── contact.js             # POST /api/contact route
+│   │   └── order.js               # POST /api/order route
 │   ├── services/
 │   │   └── emailService.js        # Nodemailer email functions
 │   ├── index.js                   # Express app entry point

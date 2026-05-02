@@ -65,6 +65,7 @@ const ProductCard = ({ product }) => {
       console.log("📤 Sending:", payload);
 
       const res = await fetch(`${process.env.REACT_APP_API_URL}/api/order`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
